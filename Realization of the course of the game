@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+void printMas(int massiv[3][3]){
+    int mas[3][3] = {};
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if(massiv[i][j] == 0){
+                printf("# ");
+            }else printf("%c ", massiv[i][j]);
+            
+        }
+        printf("\n");
+    }
+}
+
+int main(){
+    int x,y;
+    int countTry = 0; 
+    int coordinate1, coordinate2 = 0;
+    int mas[3][3] = {};
+    printf("Who is first? (Enter 1 if first player, 2 if second player) ");
+    scanf("%d", &countTry);
+    while(1){
+        if(countTry %2 == 0){
+            countTry++;
+            printf("Second player: ");
+            printf("Enter coordinates x y: ");
+            scanf("%d%d", &x, &y);
+                if(x >= 0 && x < 3 && y >= 0 && y < 3){
+                    if(mas[x][y] == 0){
+                        coordinate1 = x;
+                        coordinate2 = y; 
+                        mas[coordinate1][coordinate2] = 142; 
+                        printMas(mas);
+                    }else printf("This cell is occupied by another player ");
+                }else printf("Wrong coordinates");   
+        }
+        if(countTry %2 != 0){
+            countTry++;
+            printf("First player: ");
+            printf("Enter coordinates x y: ");
+            scanf("%d%d", &x, &y);
+                if(x >= 0 && x < 3 && y >= 0 && y < 3){
+                    if(mas[x][y] == 0){
+                        coordinate1 = x;
+                        coordinate2 = y; 
+                        mas[coordinate1][coordinate2] = 149; 
+                        printMas(mas);
+                    }else printf("This cell is occupied by another player ");
+                    
+                }else printf("Wrong coordinates");  
+        }
+         
+    }
+    
+    return 0;
+}
