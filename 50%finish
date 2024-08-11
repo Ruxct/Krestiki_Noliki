@@ -1,0 +1,98 @@
+#include <stdio.h>
+
+void printMas(int massiv[3][3]){
+    int mas[3][3] = {};
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if(massiv[i][j] == 0){
+                printf("# ");
+            }else printf("%c ", massiv[i][j]);
+            
+        }
+        printf("\n");
+    }
+}
+
+int checkWin(int massiv[3][3]){
+    int i,j;
+    
+    for(i = 0; i < 3; i++){
+        if(massiv[i][0] != 0 && massiv[i][0] == massiv[i][1] && massiv[i][1] == massiv[i][2])
+            return 1;
+    }
+    
+    for(j = 0; j < 3; j++){
+        if(massiv[0][j] != 0 && massiv[0][j] == massiv[1][j] &&  massiv[1][j] == massiv[2][j])
+            return 1;
+    } 
+
+    if(massiv[0][0] != 0 && massiv[0][0] == massiv[1][1] && massiv[1][1] == massiv[2][2])
+        return 1;
+    
+    if(massiv[0][2] != 0 && massiv[0][2] == massiv[1][1] && massiv[1][1] == massiv[2][0])
+        return 1;
+
+    return 0;
+}
+
+
+
+int main(){
+    int x,y;
+    int countTry, count = 0; 
+    int coordinate1, coordinate2 = 0;
+    int mas[3][3] = {};
+    printf("Who is first? (Enter 1 if first player, 2 if second player) ");
+    scanf("%d", &countTry);
+    while(1){
+        if(countTry %2 == 0){
+            count++;
+            countTry++;
+            printf("Second player: ");
+            printf("Enter coordinates y x: ");
+            scanf("%d%d", &x, &y);
+                if(x >= 0 && x < 3 && y >= 0 && y < 3){
+                    if(mas[x][y] == 0){
+                        coordinate1 = x;
+                        coordinate2 = y; 
+                        mas[coordinate1][coordinate2] = 142; 
+                        printMas(mas);
+
+                        int pobeda = checkWin(mas);
+                        if(pobeda != 0){
+                            printf("The wiiner is second player!");
+                            break;
+                        }
+                            
+
+                    }else printf("This cell is occupied by another player ");
+                }else printf("Wrong coordinates");   
+        }
+        if(countTry %2 != 0){
+            count++;
+            countTry++;
+            printf("First player: ");
+            printf("Enter coordinates y x: ");
+            scanf("%d%d", &x, &y);
+                if(x >= 0 && x < 3 && y >= 0 && y < 3){
+                    if(mas[x][y] == 0){
+                        coordinate1 = x;
+                        coordinate2 = y; 
+                        mas[coordinate1][coordinate2] = 149; 
+                        printMas(mas);
+                        int pobeda = checkWin(mas);
+                        
+                        if(pobeda != 0){
+                            printf("The wiiner is second player!");
+                            break;
+                        }
+                    }else printf("This cell is occupied by another player ");
+                    
+                }else printf("Wrong coordinates");  
+        }
+
+         
+    }
+    
+    return 0;
+}
